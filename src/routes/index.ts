@@ -1,7 +1,7 @@
 import { Router,urlencoded } from "express"
 import createBasicAuthFunc from "../basicAuth"
 import cors from "cors"
-import AuthDB from "./authDB"
+import AuthDB, { AuthorizationError } from "./authDB"
 import { SplitBasicAuth } from "../util"
 
 export default (authDB:AuthDB)=>{
@@ -45,14 +45,25 @@ export default (authDB:AuthDB)=>{
     ){
       return res.status(400).end();
     }
-    await authDB.authRequest(
-      req.query.request_type,
-      req.query.client_id,
-      req.query.redirect_uri,
-      req.query.scope.split(" "),
-      req.body.username,
-      req.body.password
-    )
+
+    let redirect_uri:URL;
+    try {
+      redirect_uri = await authDB.authRequest(
+        req.query.request_type,
+        req.query.client_id,
+        req.query.redirect_uri,
+        req.query.scope.split(" "),
+        typeof req.query.state !=="string" ? null : req.query.state,
+        req.body.username,
+        req.body.password
+      )
+    }catch(e){
+      if (e instanceof AuthorizationError){
+        redirect_uri = e
+      }else throw new TypeError(`Invalid error type, expected type is AuthorizationError`);
+    }
+
+    res.redirect(redirect_uri.toString())
   })
 
   r.post("/token",cors,urlencoded(),async(req,res)=>{
