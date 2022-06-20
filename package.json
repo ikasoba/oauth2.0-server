@@ -1,7 +1,10 @@
 {
+  "type": "module",
+  "main": ".out/routes/index.js",
   "scripts": {
     "watch": "tsc -w",
-    "run": "nodemon .out/index.js"
+    "install": "tsc --build",
+    "run": "nodemon ./.out/src/index.js"
   },
   "dependencies": {
     "@types/express": "^4.17.13",
