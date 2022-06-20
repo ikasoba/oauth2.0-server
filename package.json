@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "main": ".out/routes/index.js",
+  "main": ".out/src/routes/index.js",
   "scripts": {
     "watch": "tsc -w",
     "install": "tsc --build",
