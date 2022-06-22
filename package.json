@@ -11,7 +11,7 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "install": "tsc --build --declaration",
+    "install": "tsc --build ; tsc --declaration",
     "run": "nodemon ./.out/src/index.js"
   },
   "dependencies": {
