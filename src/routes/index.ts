@@ -3,9 +3,6 @@ import _cors from "cors"
 import AuthDB, { AuthorizationError, ClientTypes, TokenRequestErrorTypes } from "./authDB.js"
 import { nullableEqual, splitBasicAuth } from "../util.js"
 
-export * from "./authDB"
-
-
 const cors = ()=>(_cors as Function)()
 
 const htmlEscape = (s:string) => s.replace(/[<>/="'`&]/g,([c])=>"&#x"+c.charCodeAt(0).toString(16)+";");
