@@ -3,8 +3,11 @@
   "main": ".out/src/routes/index.js",
   "types": "src/routes/index.ts",
   "exports": {
-    ".": "./src/routes/index.ts",
-    "./authDB": "./src/routes/authDB.ts"
+    ".": "./.out/src/routes/index.js",
+    "./authDB": {
+      "types":"./src/routes/authDB.ts",
+      "default":"./.out/src/routes/authDB.js"
+    }
   },
   "scripts": {
     "watch": "tsc -w",
