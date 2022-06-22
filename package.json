@@ -3,21 +3,21 @@
   "main": ".out/src/routes/index.js",
   "scripts": {
     "watch": "tsc -w",
-    "install": "tsc --build",
+    "preinstall": "tsc --build",
     "run": "nodemon ./.out/src/index.js"
   },
   "dependencies": {
-    "@types/express": "^4.17.13",
-    "@types/node": "^17.0.23",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "nodemon": "^2.0.15",
     "typescript": "^4.6.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
+    "nodemon": "^2.0.15",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.23",
     "eslint": "^8.12.0"
   }
 }
