@@ -3,7 +3,7 @@
   "main": ".out/src/routes/index.js",
   "scripts": {
     "watch": "tsc -w",
-    "preinstall": "tsc --build",
+    "install": "tsc --build",
     "run": "nodemon ./.out/src/index.js"
   },
   "dependencies": {
