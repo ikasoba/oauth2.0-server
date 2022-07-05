@@ -2,13 +2,6 @@
   "type": "module",
   "main": ".out/src/routes/index.js",
   "types": "src/routes/index.ts",
-  "exports": {
-    ".": "./.out/src/routes/index.js",
-    "./authDB": {
-      "types":"./src/routes/authDB.ts",
-      "default":"./.out/src/routes/authDB.js"
-    }
-  },
   "scripts": {
     "watch": "tsc -w",
     "install": "tsc --build && tsc --declaration",

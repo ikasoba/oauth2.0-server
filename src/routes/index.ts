@@ -97,7 +97,7 @@ export default (authDB:AuthDB)=>{
       if (!await authDB.isValidClientId(req.query.client_id)){
         return res.redirect(new AuthorizationError(req.query.redirect_uri,"invalid_request").toString())
       }
-      if (!await authDB.isRedirectIdFromClient(req.query.client_id,req.query.redirect_uri)){
+      if (req.query.redirect_uri && !await authDB.isRedirectIdFromClient(req.query.client_id,req.query.redirect_uri)){
         return res.redirect(new AuthorizationError(req.query.redirect_uri,"invalid_request").toString())
       }
       try {
