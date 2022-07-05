@@ -3,7 +3,7 @@ import _cors from "cors"
 import AuthDB, { AuthorizationError, ClientTypes, TokenRequestErrorTypes } from "./authDB.js"
 import { nullableEqual, splitBasicAuth } from "../util.js"
 
-export * from "./authDB"
+export * from "./authDB.js"
 
 const cors = ()=>(_cors as Function)()
 
