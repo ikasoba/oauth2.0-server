@@ -1,9 +1,11 @@
 import { Request, Router,urlencoded } from "express"
 import _cors from "cors"
-import AuthDB, { AuthorizationError, ClientTypes, TokenRequestErrorTypes } from "./authDB.js"
+import _AuthDB, { AuthorizationError, ClientTypes, TokenRequestErrorTypes } from "./authDB.js"
 import { nullableEqual, splitBasicAuth } from "../util.js"
 
 export * from "./authDB.js"
+export type AuthDB = _AuthDB
+
 
 const cors = ()=>(_cors as Function)()
 
