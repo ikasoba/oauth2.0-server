@@ -50,6 +50,7 @@ export default (authDB:AuthDB)=>{
 
   r.get("/authorize",(req,res)=>{
     if (authDB.authorizePage){
+      console.log(`${req.protocol}://${authDB.host||req.headers.host}`,authDB.authorizePage)
       const pageURL = new URL(authDB.authorizePage)
       new URL(req.url,`${req.protocol}://${authDB.host||req.headers.host}`).searchParams.forEach(([k,v])=>
         pageURL.searchParams.append(k,v)
