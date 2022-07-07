@@ -50,12 +50,12 @@ export default (authDB:AuthDB)=>{
 
   r.get("/authorize",(req,res)=>{
     if (authDB.authorizePage){
-      console.log(`${req.protocol}://${authDB.host||req.headers.host}`,authDB.authorizePage)
-      const pageURL = new URL(authDB.authorizePage)
-      new URL(req.url,`${req.protocol}://${authDB.host||req.headers.host}`).searchParams.forEach(([k,v])=>
+      let isLocalPath = false
+      const pageURL = authDB.authorizePage[0]=="/" ? (isLocalPath=true,new URL(authDB.authorizePage,"https://dummy.example.com")) : new URL(authDB.authorizePage)
+      new URL(req.url,`${req.protocol}://${authDB.host||req.headers.host}`).searchParams.forEach((k,v)=>
         pageURL.searchParams.append(k,v)
       )
-      res.redirect(pageURL.toString());
+      res.redirect(isLocalPath ? `${pageURL.pathname}${pageURL.search}${pageURL.hash}` : pageURL.toString());
       return res.end();
     }
     const url = new URL(req.url,`${req.protocol}://${authDB.host||req.headers.host}`).toString()
