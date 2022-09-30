@@ -123,9 +123,9 @@ export default (authDB:AuthDB)=>{
         return res.redirect(new AuthorizationError(req.query.redirect_uri,"invalid_request").toString())
       }
       try {
-        return res.redirect(await authDB.authorizeFromImplicit(
+        return res.redirect((await authDB.authorizeFromImplicit(
           req.query.request_type,req.query.client_id,req.query.redirect_uri,req.query.scope?.split(" ") || [],req.query.state,req.body.username,req.body.password
-        ).toString())
+        )).toString())
       }catch(e:unknown){
         console.error(e)
         return res.redirect((e as AuthorizationError).toString())
@@ -170,7 +170,6 @@ export default (authDB:AuthDB)=>{
       }
       if (
             await authDB.getClientTypeFromId(client_id) == ClientTypes.CONFIDENTIAL && (client_secret==null || ! await authDB.authenticateClient(client_id,client_secret))
-        ||  client_secret!=null && ! await authDB.authenticateClient(client_id,client_secret)
       ){
         res.header("WWW-Authenticate","Basic")
         return res.status(401).json({error:TokenRequestErrorTypes.INVALID_CLIENT})
